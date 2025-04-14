@@ -1,17 +1,99 @@
+
 \documentclass[12pt]{article}
 
 % Packages
 \usepackage[spanish,activeacute,es-tabla]{babel}
+\usepackage{hyperref}
+\usepackage{sectsty}
 
-\title{Sistemas Digitales - 1era Guia Practica}
-\author{Roman Lopez Garro}
+\sectionfont{\normalsize}
+
+\title{Sistemas Digitales - 1era Guia Practica - Representación de la información}
+\author{Román López Garro}
 
 
 \begin{document}
 \maketitle
 
+\begin{abstract}
+    Ejercicios resueltos de la primera guia, lo relevante es entender como podemos representar números en distintas bases y que limitaciones se tienen al utilizar ciertas interpretaciones de números en binario para manejar a los números positivos y negativos.
+\end{abstract}
 
-\section{Primera seccion}
+\tableofcontents
 
+\newpage
+
+% -------------------------
+% Ejercicio 8
+% -------------------------
+\section*{Ejercicio 8}
+\addcontentsline{toc}{section}{Ejercicio 8}
+\phantomsection
+
+\textit{¿Cómo acomodaría esta suma de números hexadecimales de 4 dígitos en notación complemento a 2, para que en ningún momento se produzca \textit{overflow}?}
+
+\[
+7744_{16} + 5499_{16} + 6788_{16} + \mathit{AB68}_{16} + \mathit{88BD}_{16} + 9879_{16} = 0003_{16}
+\]
+
+\textbf{Solucion: } \\
+                    \\
+                    Lo relevante de este punto es no perder de vista la cantidad de bits disponibles para operar. En este caso como tenemos \textbf{4 dígitos} en hexadecimal nos quedan \textbf{16 dígitos} máximos en binario, por lo tanto interpretados complemento a 2 algunos números van a ser positivos y otros negativos, los que nos hace muy sencillo saber en que orden se tienen que sumar puesto que simplemente podemos sumar positivos con negativos.
+
+Primero convierto todos los numeros a binario, esto es independiente claramente del tipo de interpretación:
+
+\begin{itemize}
+    \item[] $7744_{16} = 0111 0111 0100 0100_{2}$
+    \item[] $5499_{16} = 0101 0100 1001 1001_{2}$
+    \item[] $6788_{16} = 0110 0111 1000 1000_{2}$
+    \item[] $AB68_{16} = 1010 1011 0110 1000_{2}$
+    \item[] $88BD_{16} = 1000 1000 1011 1101_{2} $
+    \item[] $9879_{16} = 1001 1000 0111 1001_{2}$
+\end{itemize}
+
+Luego agarro un numero positivo (7744) y le sumo uno negativo (AB68): \\ \\
+
+\begin{tabular}{c c c}
+\texttt{7744}                        & \texttt{= 0111011101000100} \\
+\texttt{AB68}                        & \texttt{= 1010101101101000}\\
+\texttt{(7744 + AB68 + 9879 + 5499)} & \texttt{= 0010001010101100}
+\end{tabular} \\ \\
+
+Le sumo uno negativo, porque se que no me va a dar overflow. \\ \\
+
+\begin{tabular}{c c c}
+\texttt{(7744 + AB68)}        & \texttt{= 0010001010101100} \\
+\texttt{9879}                 & \texttt{= 1001100001111001}\\
+\texttt{(7744 + AB68 + 9879)} & \texttt{= 1011101100100101}
+\end{tabular} \\ \\
+
+Le sumo uno positivo porque se que no me a dar overflow, porque mi suma me dio negativo. \\
+
+\begin{tabular}{c c c}
+\texttt{(7744 + AB68 + 9879)}       & \texttt{= 1011101100100101} \\
+\texttt{5499}                       & \texttt{= 0101010010011001} \\
+\texttt{(7744 + AB68 + 9879 + 5499)}& \texttt{= 0000111101111110}
+\end{tabular} \\ \\
+
+Le sumo uno negativo de los numeros restantes: \\ \\
+
+\begin{tabular}{c c c}
+\texttt{(7744 + AB68 + 9879 + 5499)} & \texttt{= 0000111110111110} \\
+\texttt{88BD}                        & \texttt{= 1000100010111101} \\
+\texttt{(7744 + AB68 + 9879 + 5499 + 88BD)} & \texttt{= 1001100001111011}
+\end{tabular} \\ \\
+
+Le sumo uno positivo de los restantes: \\ \\
+\begin{tabular}{c c c}
+\texttt{(7744 + AB68 + 9879 + 5499 + 88BD)}        & \texttt{= 1001100001111011} \\
+\texttt{6788}                                      & \texttt{= 0110011110001000} \\
+\texttt{(7744 + AB68 + 9879 + 5499 + 88BD + 6788)} & \texttt{= 0000000000000011}
+\end{tabular} \\ \\
+
+
+
+Una respuesta seria: 7744 + AB68 + 9879 + 5499 + 88BD + 6788. \\
+En ese orden no nos da overflow y con 16 digitos vemos que nos da igual a lo que el enunciado indica que es 3.
 
 \end{document}
+
