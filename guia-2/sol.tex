@@ -1,0 +1,83 @@
+
+\documentclass[12pt]{article}
+
+% Packages
+\usepackage[spanish,activeacute,es-tabla]{babel}
+\usepackage{hyperref}
+\usepackage{sectsty}
+\usepackage{enumitem}
+\usepackage{amsmath}
+
+\sectionfont{\normalsize}
+
+\title{Sistemas Digitales - 2da Guia Practica - Lógica circuital}
+\author{Román López Garro}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+    Ejercicios resueltos de la segunda guía: Álgebra de Boole, circuitos combinatorios y circuitos secuenciales..
+
+\begin{enumerate}[left=0pt, label=\alph*), leftmargin=*]
+	\item Suma booleana: El \textbf{+} representa el OR.
+	\item Producto booleano: El \textbf{*} representa el AND.
+	\item La suma directa: $ p \oplus q = ( \bar p.q) + (p.\bar q) $
+\end{enumerate}
+
+
+\end{abstract}
+
+\tableofcontents
+
+\newpage
+
+% -------------------------
+% Ejercicio 1
+% -------------------------
+\section*{Ejercicio 1}
+\addcontentsline{toc}{section}{Ejercicio 1}
+\phantomsection
+
+\textit{Demostrar si las siguientes equivalencias de fórmulas booleanas son verdaderas o falsas: }
+
+\begin{enumerate}[left=0pt, label=\alph*), leftmargin=*]
+	\item $x.z = (x + y).(x + \bar y).(\bar x + z)$
+	\item $x \oplus (y.z) = (x \oplus y).(x \oplus z)$ donde se aplica la propiedad distributiva con respecto a $\oplus$
+
+\end{enumerate}
+
+\textbf{Solucion: } \\
+                    \\
+
+\begin{enumerate}[left=0pt, label=\alph*), leftmargin=*]
+	\item $x.z = (x + y).(x + \bar y).(\bar x + z)$
+\end{enumerate}
+
+\begin{align*}
+	(x+y).(x+\bar y)(\bar x + z) &= x + (y + \bar y).(\bar x + z) \\
+	&= x + 0.(\bar x + z) \\
+	&= x + \bar x + x.z \\
+	&= 0 + x . z \\ &= x.z
+\end{align*}
+
+\begin{enumerate}[left=0pt, label=\alph*), leftmargin=*]
+	\item $x \oplus (y.z) = (x \oplus y).(x \oplus z)$ donde se aplica la propiedad distributiva con respecto a $\oplus$
+\end{enumerate}
+
+Por un lado tenemos que:
+\begin{align*}
+	(x \oplus y).(x \oplus z) &= ((\bar x.y) + (x. \bar y)) . ((\bar x .z) + (x. \bar z)) \\
+	&= (((\bar x . y) + (x . \bar y)). (\bar x . z)) + (((\bar x .y) + (x . \bar y)).(x. \bar z)) \\
+	&= (\bar x + y + z) + (x . \bar y. \bar z)
+\end{align*}
+
+Por otro lado tenemos que:
+\begin{align*}
+	x \oplus (y.z) &= (\bar x . y . z) + (x . \overline{(y.z)})
+\end{align*}
+luego vemos que son dos expresiones diferentes.
+
+
+\end{document}
+
